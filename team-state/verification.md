@@ -69,3 +69,4 @@ none
 - Tests: node tests.mjs -> exit 0 (26 passed).
 - Top row: title 20px left plus compact buttons right, both capped to board width via fitHud; 16px blank row before HUD.
 - Tests: node tests.mjs -> exit 0 (26 passed).
+- Ship: https://github.com/mlesk/neon-tetris public, Pages legacy build from main root -> https://mlesk.github.io/neon-tetris/ (200).

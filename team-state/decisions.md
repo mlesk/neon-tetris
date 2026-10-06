@@ -53,3 +53,4 @@
 - 2026-10-06 | UI-TWEAK | YOLO: auto-selected labelless next piece with prohibition-icon hidden state plus even 22px HUD stats because HUD must read as one clean row (post-ship tweak)
 - 2026-10-06 | UI-TWEAK | YOLO: auto-selected title over score plus block-level next canvas so preview sits flush on the board (post-ship tweak)
 - 2026-10-06 | UI-TWEAK | YOLO: auto-selected board-width top row with title left plus compact buttons right and blank row before scores (post-ship tweak)
+- 2026-10-06 | SHIP | Published as public GitHub repo neon-tetris with Pages from main branch root (post-ship)
