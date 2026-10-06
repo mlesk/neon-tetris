@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Neon Tetris</title>
+<meta name="description" content="Arcade-quality Tetris PWA with ghost piece, hard drop, and explosive line clears.">
+<meta name="theme-color" content="#0b0e1f">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Neon Tetris">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="stars"></div>
+<header id="topbar">
+  <div class="gametitle">NEON<span>TETRIS</span></div>
+  <div class="top-actions">
+    <div id="offline-badge" style="display:none">offline</div>
+    <button id="install-chip" style="display:none">＋ install</button>
+    <button id="btn-speed" title="fall speed (cycles fast → normal → slow)">FAST</button>
+    <button id="btn-mute" title="mute (M)">🔊</button>
+    <button id="btn-ghost" title="ghost piece (G)">👻</button>
+    <button id="btn-info" title="how to play (I)">ⓘ</button>
+  </div>
+</header>
+
+<main id="layout">
+  <section id="stage">
+    <div id="hud">
+      <div class="cluster">
+        <div class="stat"><label>SCORE</label><div id="score" class="big">0</div></div>
+        <div class="stat"><label>BEST</label><div id="best" class="big gold">0</div></div>
+        <div class="stat"><label>LEVEL</label><div id="level" class="lvl">1</div></div>
+        <div class="stat"><label>ROWS</label><div id="rows" class="lvl">0</div></div>
+      </div>
+      <div class="stat" id="next-box"><canvas id="next" width="88" height="52" title="click to hide next piece"></canvas></div>
+    </div>
+    <div id="well-wrap">
+      <div id="well-box">
+      <canvas id="well" width="300" height="600"></canvas>
+      <div id="overlay" class="show">
+        <h1 id="overlay-title">NEON TETRIS</h1>
+        <p id="overlay-sub">Arrows steer · Space slams · P pauses</p>
+        <div id="final" style="display:none"></div>
+        <div id="gameover-stats" style="display:none">
+          <div>SCORE <b id="final-score">0</b></div>
+          <div id="newbest" style="display:none">✨ NEW BEST ✨</div>
+          <div>BEST <b id="final-best">0</b> · ROWS <b id="final-rows">0</b> · BEST <b id="best2">0</b></div>
+        </div>
+        <button id="btn-start">▶ START</button>
+        <button id="btn-resume" style="display:none">RESUME</button>
+        <button id="btn-stop" style="display:none">■ STOP</button>
+      </div>
+      </div>
+    </div>
+    <div id="tap-sound" style="display:none">🔈 tap anywhere for sound</div>
+    <div id="touchbar">
+      <button id="btn-left">◀</button>
+      <button id="btn-down">▼</button>
+      <button id="btn-right">▶</button>
+      <button id="btn-rot">⟳</button>
+      <button id="btn-drop" class="drop">SLAM</button>
+      <button id="btn-pause">II</button>
+    </div>
+  </section>
+</main>
+
+<div id="info-modal" style="display:none">
+  <div id="info-card">
+    <h2>HOW TO PLAY</h2>
+    <div class="hints">
+      <div>← → steer · ↓ soft drop · SPACE slam</div>
+      <div>↑ / X spin · Z spin back · P pause</div>
+      <div>R restart · M mute · G ghost</div>
+      <div>Touch: swipe steers · tap spins · swipe-down slams</div>
+      <div>Click the board to pause.</div>
+    </div>
+    <h2>CLEAR LADDER</h2>
+    <div class="legend">
+      <div><i class="dot pop"></i>single · pop</div>
+      <div><i class="dot boom"></i>double · boom</div>
+      <div><i class="dot mega"></i>triple · mega</div>
+      <div><i class="dot tet"></i>TETRIS · eruption</div>
+    </div>
+    <h2>TOP 3</h2>
+    <ol id="top3"></ol>
+    <button id="btn-info-close">CLOSE</button>
+  </div>
+</div>
+
+<script>
+  // game-over stats visibility helper (kept tiny on purpose)
+  new MutationObserver(function () {
+    var t = document.getElementById('overlay-title').textContent;
+    var go = (t === 'GAME OVER');
+    document.getElementById('gameover-stats').style.display = go ? '' : 'none';
+  }).observe(document.getElementById('overlay-title'), { childList: true, characterData: true, subtree: true });
+</script>
+<script src="engine.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
